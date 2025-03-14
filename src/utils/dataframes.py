@@ -1,3 +1,4 @@
+from os import makedirs
 from src.utils.logger import sys_logger
 from src.utils.constants import SYSTEM_COLS
 from src.utils.files import get_saved_file, save_file, get_save_filename
@@ -132,16 +133,25 @@ def apply_scd2(old_df, new_df, key_cols, date, is_full=False):
 
 def process_data(source_name, dataframe, config, date):
     sys_logger.info(f"Processing data for {source_name}")
+    
     key_cols = config.get("key_columns",[])
+    schema = pd.DataFrame(config.get('schema'))
     is_full = config.get('data_type') == 'full'
 
     current_table = get_saved_file(source_name)
 
-    clean_records, error_records = validate_data(source_name, dataframe)
+    clean_records,\
+    error_records = validate_data(source_name, dataframe, schema)
 
     if len(error_records) > 0:
         sys_logger.warning(f"Found {len(error_records)} error records for {source_name}")
+        
         #TODO: save error records to a file
+        error_folder = './error_reports/'
+        error_filename = f'{error_folder}errors_{source_name}_{date.strftime("%Y%m%d")}.csv'
+        
+        makedirs(error_folder, exist_ok=True)
+        error_records.to_csv(error_filename, index=False)
 
     new_table = apply_scd2(
         current_table,

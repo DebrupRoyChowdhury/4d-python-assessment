@@ -1,7 +1,8 @@
 import pandas as pd
 
-def validate_data(source_name, dataframe):
-    #TDOO: Add validation logic here
+def validate_data(source_name, dataframe, schema):
+    #TODO: Add validation logic here
+    
     
     # placeholder for clean and error rows
     clean_rows = dataframe
