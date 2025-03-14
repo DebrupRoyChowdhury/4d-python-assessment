@@ -26,9 +26,9 @@ def read_csv(filepath, **kwargs):
     sys_logger.info(f"Reading csv file from {filepath} with kwargs {kwargs}")
     return pd.read_csv(filepath, **kwargs)
 
-def read_excel(filepath, **kwargs):
-    sys_logger.info(f"Reading excel file from {filepath} with kwargs {kwargs}")
-    return pd.read_excel(filepath, **kwargs)
+def read_json(filepath, **kwargs):
+    sys_logger.info(f"Reading json file from {filepath} with kwargs {kwargs}")
+    return pd.read_json(filepath, **kwargs)
 
 def read_parquet(filepath):
     sys_logger.info(f"Reading parquet file from {filepath}")
@@ -38,8 +38,8 @@ def get_read_func(type):
     match type:
         case "csv":
             return read_csv
-        case "excel":
-            return read_excel
+        case "json":
+            return read_json
         case "parquet":
             return read_parquet
         case _:
