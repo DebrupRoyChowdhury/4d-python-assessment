@@ -141,7 +141,7 @@ def process_data(source_name, dataframe, config, date):
     current_table = get_saved_file(source_name)
 
     clean_records,\
-    error_records = validate_data(source_name, dataframe, schema)
+    error_records = validate_data(dataframe, schema)
 
     if len(error_records) > 0:
         sys_logger.warning(f"Found {len(error_records)} error records for {source_name}")

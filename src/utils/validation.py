@@ -1,6 +1,6 @@
 import pandas as pd
 
-def validate_data(source_name, dataframe, schema):
+def validate_data(dataframe, schema):
     #TODO: Add validation logic here
     
     
