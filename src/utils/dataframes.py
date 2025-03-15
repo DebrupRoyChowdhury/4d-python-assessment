@@ -135,7 +135,7 @@ def process_data(source_name, dataframe, config, date):
     sys_logger.info(f"Processing data for {source_name}")
     
     key_cols = config.get("key_columns",[])
-    schema = pd.DataFrame(config.get('schema'))
+    schema = config.get('schema')
     is_full = config.get('data_type') == 'full'
 
     current_table = get_saved_file(source_name)
